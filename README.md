@@ -1,7 +1,7 @@
-# NZ Covid Location of Interest Poster - Discord
+# NZ Doses to 90% per CHB - Discord
 
-Posts new or updated Covid locations of interest from the [Ministry of Health Github data dump](https://github.com/minhealthnz/nz-covid-data/blob/main/locations-of-interest/august-2021/locations-of-interest.csv) to a Discord Webhook.
+Posts vaccine rates for the Auckland DHBs from the [Ministry of Health vaccine data page](https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data) to a Discord Webhook.
 
 ## Usage
 
-Set `WEBHOOK_URL` and `DYNAMODB_ENDPOINT` and run using Java 11.
+Set `WEBHOOK_URL` and run using Java 11.
