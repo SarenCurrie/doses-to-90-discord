@@ -20,8 +20,11 @@ fun buildEmbed(
                     "https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data"
                 )
             )
-            .addField(WebhookEmbed.EmbedField(true, "First doses to 90%", data.firstDosesLeft))
-            .addField(WebhookEmbed.EmbedField(true, "Second doses to 90%", data.secondDosesLeft))
+            .addField(WebhookEmbed.EmbedField(true, "First doses", data.firstDosesPercent))
+            .addField(WebhookEmbed.EmbedField(true, "Second doses", data.secondDosesPercent))
+        if (data.secondDosesLeft != "0") {
+            builder.addField(WebhookEmbed.EmbedField(true, "Second doses to 90%", data.secondDosesLeft))
+        }
     } catch (e: Exception) {
         println(data)
         throw e
