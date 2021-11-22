@@ -7,9 +7,15 @@ fun buildEmbed(
     data: VaccineUpdate
 ): WebhookEmbed {
     val builder = WebhookEmbedBuilder()
+    val color = if (data.secondDosesLeft == "0") {
+        0x11cf73
+    } else {
+        val dosesLeft = data.secondDosesLeft.replace(",", "").toInt()
+        scaleRed(dosesLeft) * 256 * 256 + scaleGreen(dosesLeft) * 256 + 73
+    }
     try {
         builder
-            .setColor(0x11cf73)
+            .setColor(color)
             .setTitle(
                 WebhookEmbed.EmbedTitle("Vaccine Update for ${data.dhb}", null)
             )
@@ -30,4 +36,31 @@ fun buildEmbed(
         throw e
     }
     return builder.build()
+}
+const val max = 25000
+
+fun scaleRed(dosesLeft: Int): Int {
+    val from = 0xff
+    val to = 0x33
+
+    if (dosesLeft > max) {
+        return from
+    }
+
+    val scale = (dosesLeft / max.toFloat() * (from - to)).toInt()
+
+    return scale + to
+}
+
+fun scaleGreen(dosesLeft: Int): Int {
+    val from = 0x11
+    val to = 0xaa
+
+    if (dosesLeft > max) {
+        return from
+    }
+
+    val scale = (dosesLeft / max.toFloat() * (to - from)).toInt()
+
+    return to - scale
 }
