@@ -3,7 +3,9 @@ package com.sarencurrie.doses
 import club.minnced.discord.webhook.send.WebhookEmbed
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder
 
-fun buildEmbed(
+const val max = 25000
+
+fun buildDosesTo90Embed(
     data: VaccineUpdate
 ): WebhookEmbed {
     val builder = WebhookEmbedBuilder()
@@ -22,7 +24,7 @@ fun buildEmbed(
             .setAuthor(
                 WebhookEmbed.EmbedAuthor(
                     "Ministry of Health",
-                    null,
+                    "https://pbs.twimg.com/profile_images/259393733/mohswirl_200x200.jpg",
                     "https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data"
                 )
             )
@@ -37,7 +39,24 @@ fun buildEmbed(
     }
     return builder.build()
 }
-const val max = 25000
+
+fun buildBoostersEmbed(dailyBoosterCount: String, totalBoosterCount: String): WebhookEmbed {
+    return WebhookEmbedBuilder()
+        .setColor(0x002639)
+        .setTitle(
+            WebhookEmbed.EmbedTitle("Booster Update", null)
+        )
+        .setAuthor(
+            WebhookEmbed.EmbedAuthor(
+                "Ministry of Health",
+                "https://pbs.twimg.com/profile_images/259393733/mohswirl_200x200.jpg",
+                "https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data"
+            )
+        )
+        .addField(WebhookEmbed.EmbedField(true, "Daily booster doses", dailyBoosterCount))
+        .addField(WebhookEmbed.EmbedField(true, "Total booster doses", totalBoosterCount))
+        .build()
+}
 
 fun scaleRed(dosesLeft: Int): Int {
     val from = 0xff
